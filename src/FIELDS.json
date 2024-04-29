@@ -138,38 +138,6 @@
     "step": 1
   },
 
-  "goalRecordInProgressAnimationColor": {
-    "group": "Goal record in progress animation",
-    "type": "colorpicker",
-    "label": "Animation color",
-    "value": "rgba(255, 0, 0, 1)"
-  },
-  "goalRecordInProgressAnimationWidth": {
-    "group": "Goal record in progress animation",
-    "type": "number",
-    "label": "Animation width (px)",
-    "value": 2,
-    "min": 0,
-    "step": 1
-  },
-  "goalRecordInProgressAnimationDashArray": {
-    "group": "Goal record in progress animation",
-    "type": "number",
-    "label": "Animation dasharray (%)",
-    "value": 75,
-    "min": 0,
-    "max": 100,
-    "step": 1
-  },
-  "goalRecordInProgressAnimationDuration": {
-    "group": "Goal record in progress animation",
-    "type": "number",
-    "label": "Animation duration (seconds)",
-    "value": 2.5,
-    "min": 0,
-    "step": 0.1
-  },
-
   "goalAmountElementWidth": {
     "group": "Goal amount styles",
     "type": "number",
