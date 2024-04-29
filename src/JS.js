@@ -138,7 +138,7 @@ const renderGoals = () => {
     goalElement.innerHTML = `
         <span class="goal-amount">${goal.amount}</span>
         <span class="goal-type-label">${GlobalVariables.widgetFields.goalTypeLabel}</span>
-        <span class="goal-reward-description">${goal.description}${goal.description}${goal.description}${goal.description}${goal.description}${goal.description}</span>
+        <span class="goal-reward-description">${goal.description}</span>
         <img class="completed-icon" alt="check" src="https://cdn.discordapp.com/emojis/1001393904429584514.webp">
         <span class="progress"></span>
     `;
