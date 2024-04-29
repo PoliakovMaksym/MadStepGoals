@@ -126,7 +126,9 @@ const releaseTheWildToriOnChatMessage = chatMessage => {
 // Parse goals information from the widget and render the
 // initial list of goals without any special effects
 const renderGoals = () => {
-  GlobalVariables.goalsList.forEach(goal => {
+  const { goalsList, widgetFields, GoalsListElement } = GlobalVariables;
+
+  goalsList.forEach(goal => {
     // Create goal element
     const goalElement = document.createElement('div');
 
@@ -137,17 +139,17 @@ const renderGoals = () => {
 
     goalElement.innerHTML = `
         <span class="goal-amount">${goal.amount}</span>
-        <span class="goal-type-label">${GlobalVariables.widgetFields.goalTypeLabel}</span>
+        <span class="goal-type-label">${widgetFields.goalTypeLabel}</span>
         <span class="goal-reward-description">${goal.description}</span>
         <span class="progress"></span>
     `;
 
-    if (GlobalVariables.widgetFields.goalStatusIcon) {
-      goalElement.innerHTML += `<img class="completed-icon" src="${GlobalVariables.widgetFields.goalStatusIcon}">`;
+    if (widgetFields.goalStatusIcon) {
+      goalElement.innerHTML += `<img class="completed-icon" src="${widgetFields.goalStatusIcon}">`;
     }
 
     // Add a created goal element to the list of goals
-    GlobalVariables.GoalsListElement.appendChild(goalElement);
+    GoalsListElement.appendChild(goalElement);
   });
 };
 
@@ -161,36 +163,44 @@ const updateRenderedGoals = currentProgress => {
     // Grab goal's amount
     const goalAmount = parseInt(goal.getAttribute('data-amount'));
 
-    // Unmark the goal as "in progress". The correct goal will be marked as "in progress"
-    // with all the attributes since we are updating all the goals anyway.
+    // Remove marks related to goals in progress.
+    // The correct goal will be marked as "in progress" when we find it.
     goal.classList.remove('in-progress');
     goal.style.removeProperty('background');
 
-    switch (true) {
-      // The coal was not completed and not it is completed
-      case goalAmount <= currentProgress && !goal.classList.contains('completed'):
-        // Mark goal as "completed"
-        goal.classList.add('completed');
-
-        // Add "completed" animation for 2 seconds.
+    // The goal is completed
+    if (goalAmount <= currentProgress) {
+      // If the goal is not already marked as "completed," that means it was just completed.
+      // In this case, we add a little animation for a short period of time.
+      if (!goal.classList.contains('completed')) {
         goal.classList.add('goal-complete-animation');
         setTimeout(() => goal.classList.remove('goal-complete-animation'), 1000 * 2);
+      }
 
-        break;
+      // Mark goal as "completed"
+      goal.classList.add('completed');
+    }
+    // The goal is not completed
+    else {
+      // Just in case, remove marks related to completed goals
+      goal.classList.remove('completed');
+      goal.classList.remove('goal-complete-animation');
 
-      // The goal is not completed and no other goals were marked as "in progress"
-      case goalAmount > currentProgress && !currentGoalInProgressFound:
+      // We haven't found the first "in progress" goal yet
+      if (!currentGoalInProgressFound) {
         // Save the fact that we found the goal that is currently in progress
         currentGoalInProgressFound = true;
 
+        const { widgetFields } = GlobalVariables;
+
         // Mark goal as "in progress"
+        goal.classList.remove('completed');
         goal.classList.add('in-progress');
-        goal.style.background = `linear-gradient(to right, ${GlobalVariables.widgetFields.goalRecordInProgressBackgroundColor} ${(100 * currentProgress) / goalAmount}%, ${GlobalVariables.widgetFields.goalRecordBackgroundColor} 0px)`;
+        goal.style.background = `linear-gradient(to right, ${widgetFields.goalRecordInProgressBackgroundColor} ${(100 * currentProgress) / goalAmount}%, ${widgetFields.goalRecordBackgroundColor} 0px)`;
 
         // Display current progress in the "in progress" goal
         goal.getElementsByClassName('progress')[0].innerHTML = `${currentProgress}/${goalAmount}`;
-
-        break;
+      }
     }
   });
 };
