@@ -243,16 +243,6 @@ window.addEventListener('onEventReceived', eventReceivedEventObject => {
     // Grab the message data
     const chatMessage = eventReceivedEventObject.detail.event.data;
 
-    // TEST CODE ---- START
-    if (chatMessage.text.startsWith('?test')) {
-      [, additionalAmount] = chatMessage.text.split(' ');
-      const newProgress = GlobalVariables.currentProgress + Number(additionalAmount);
-
-      GlobalVariables.currentProgress = newProgress;
-      updateRenderedGoals(newProgress);
-    }
-    // TEST CODE ---- END
-
     releaseTheWildToriOnChatMessage(chatMessage);
   }
 });
