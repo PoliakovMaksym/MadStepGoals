@@ -173,8 +173,8 @@ const updateRenderedGoals = currentProgress => {
         goal.classList.add('completed');
 
         // Add "completed" animation for 2 seconds.
-        goal.classList.add('head-shake-animation');
-        setTimeout(() => goal.classList.remove('head-shake-animation'), 1000 * 2);
+        goal.classList.add('goal-complete-animation');
+        setTimeout(() => goal.classList.remove('goal-complete-animation'), 1000 * 2);
 
         break;
 

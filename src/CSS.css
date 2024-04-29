@@ -1,5 +1,11 @@
 * {
-    overflow: hidden;
+    overflow-y: hidden;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+*::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
 }
 
 html, body {
@@ -28,6 +34,7 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: {{goalsListGap}}px;
+    overflow-y: clip;
 }
 
 .goals-list .goal {
@@ -109,11 +116,11 @@ html, body {
     1000% { opacity: 0 }
 }
 
-.head-shake-animation {
-    animation: head-shake-animation 1.5s linear;
+.goal-complete-animation {
+    animation: goal-complete-animation 1.5s linear;
 }
 
-@keyframes head-shake-animation {
+@keyframes goal-complete-animation {
     0% { transform: translateX(0) }
     6.5% { transform: translateX(-6px) rotateY(-9deg) }
     18.5% { transform: translateX(5px) rotateY(7deg) }
