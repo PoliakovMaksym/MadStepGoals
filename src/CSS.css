@@ -43,8 +43,8 @@ html, body {
 }
 
 .goals-list .goal img {
-    width: {{goalStatusIconSize}}px;
-    height: {{goalStatusIconSize}}px;
+    width: {{goalStatusIconWidth}}px;
+    height: {{goalStatusIconHeight}}px;
 }
 
 .goals-list .goal.completed {

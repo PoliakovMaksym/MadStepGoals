@@ -268,10 +268,23 @@
     "step": 1
   },
 
-  "goalStatusIconSize": {
+  "goalStatusIcon": {
+    "group": "Goal status icon styles",
+    "type": "image-input",
+    "label": "Goal status icon"
+  },
+  "goalStatusIconWidth": {
     "group": "Goal status icon styles",
     "type": "number",
-    "label": "Goal status icon - size (px)",
+    "label": "Goal status icon - width (px)",
+    "value": 32,
+    "min": 0,
+    "step": 1
+  },
+  "goalStatusIconHeight": {
+    "group": "Goal status icon styles",
+    "type": "number",
+    "label": "Goal status icon - height (px)",
     "value": 32,
     "min": 0,
     "step": 1

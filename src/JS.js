@@ -139,9 +139,12 @@ const renderGoals = () => {
         <span class="goal-amount">${goal.amount}</span>
         <span class="goal-type-label">${GlobalVariables.widgetFields.goalTypeLabel}</span>
         <span class="goal-reward-description">${goal.description}</span>
-        <img class="completed-icon" alt="check" src="https://cdn.discordapp.com/emojis/1001393904429584514.webp">
         <span class="progress"></span>
     `;
+
+    if (GlobalVariables.widgetFields.goalStatusIcon) {
+      goalElement.innerHTML += `<img class="completed-icon" src="${GlobalVariables.widgetFields.goalStatusIcon}">`;
+    }
 
     // Add a created goal element to the list of goals
     GlobalVariables.GoalsListElement.appendChild(goalElement);
