@@ -1,0 +1,212 @@
+{
+  "goalType": {
+    "group": "GOAL OPTIONS",
+    "type": "dropdown",
+    "label": "Goal type",
+    "value": "subscriber-goal_amount",
+    "options": {
+      "follower-goal_amount": "Follower (goal)",
+      "follower-session_count": "Follower (session)",
+      "follower-total_count": "Follower (total)",
+      "subscriber-goal_amount": "Subscribers (goal)",
+      "subscriber-session_count": "Subscribers (session)",
+      "subscriber-total_count": "Subscribers (total)",
+      "cheer-goal_amount": "Cheer (goal)",
+      "cheer-session_amount": "Cheer (session)",
+      "tip-goal_amount": "Tip (goal)",
+      "tip-session_amount": "Tip (session)",
+      "sparks-goal_amount": "Sparks (goal)",
+      "sparks-session_count": "Sparks (session)",
+      "embers-goal_amount": "Embers (goal)",
+      "embers-session_count": "Embers (session)",
+      "botCounter": "Bot counter"
+    }
+  },
+  "goalHide": {
+    "group": "GOAL OPTIONS",
+    "type": "dropdown",
+    "value": "normal",
+    "label": "hide completed goals?",
+    "options": {
+      "hide": "hide",
+      "normal": "normal"
+    }
+  },
+  "goalText": {
+    "group": "GOAL OPTIONS",
+    "type": "text",
+    "label": "Goal text",
+    "value": "SUBS"
+  },
+  "_reward1": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #1",
+    "value": "1 - First reward"
+  },
+  "_reward2": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #2",
+    "value": "5 - Second reward"
+  },
+  "_reward3": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #3",
+    "value": "10 - Third reward"
+  },
+  "_reward4": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #4",
+    "value": "20 - Fourth reward"
+  },
+  "_reward5": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #5",
+    "value": "40 - Fifth reward"
+  },
+  "_reward6": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #6",
+    "value": ""
+  },
+  "_reward7": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #7",
+    "value": ""
+  },
+  "_reward8": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #8",
+    "value": ""
+  },
+  "_reward9": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #9",
+    "value": ""
+  },
+  "_reward10": {
+    "group": "REWARDS",
+    "type": "text",
+    "label": "Reward #10",
+    "value": ""
+  },
+  "unlockedSound": {
+    "group": "UNLOCK REWARD SOUND OPTIONS",
+    "type": "sound-input",
+    "label": "Unlocked sound effect"
+  },
+  "unlockedSoundVolume": {
+    "group": "UNLOCK REWARD SOUND OPTIONS",
+    "type": "slider",
+    "label": "Sound volume",
+    "min": 0,
+    "max": 100,
+    "steps": 1,
+    "value": 100
+  },
+  "counterName": {
+    "group": "BOT COUNTER OPTIONS",
+    "type": "text",
+    "label": "Counter name (case-sensitive)",
+    "value": "deaths"
+  },
+  "backgroundMainColor": {
+    "group": "BACKGROUND OPTIONS",
+    "type": "colorpicker",
+    "label": "Main background color",
+    "value": "rgb(52, 154, 0)"
+  },
+  "backgroundSecondaryColor": {
+    "group": "BACKGROUND OPTIONS",
+    "type": "colorpicker",
+    "label": "Secondary background color",
+    "value": "rgba(57, 156, 7, 0)"
+  },
+  "opacityMultiplier": {
+    "group": "BACKGROUND OPTIONS",
+    "type": "number",
+    "label": "Opacity Multiplier",
+    "value": 1
+  },
+  "fontFamily": {
+    "group": "TEXT OPTIONS",
+    "type": "googleFont",
+    "label": "Font family",
+    "value": "Bebas Neue"
+  },
+  "fontColor": {
+    "group": "TEXT OPTIONS",
+    "type": "colorpicker",
+    "label": "Font color",
+    "value": "#FFFFFF"
+  },
+  "unlockedColor": {
+    "group": "TEXT OPTIONS",
+    "type": "colorpicker",
+    "label": "Unlocked color",
+    "value": "#FFDF00"
+  },
+  "fontSize": {
+    "group": "TEXT OPTIONS",
+    "type": "number",
+    "label": "Text font size (px)",
+    "value": 24
+  },
+  "fontWeight": {
+    "group": "TEXT OPTIONS",
+    "type": "dropdown",
+    "label": "Font weight",
+    "value": "400",
+    "options": {
+      "100": "100 - Thin",
+      "300": "300 - Light",
+      "400": "400 - Regular",
+      "500": "500 - Medium",
+      "700": "700 - Bold",
+      "900": "900 - Black"
+    }
+  },
+  "textShadow": {
+    "group": "TEXT OPTIONS",
+    "type": "text",
+    "label": "Text shadow",
+    "value": "0 0 2px #000, 0 0 2px #000"
+  },
+  "textTransform": {
+    "group": "TEXT OPTIONS",
+    "type": "dropdown",
+    "label": "Text transform",
+    "value": "uppercase",
+    "options": {
+      "uppercase": "Uppercase",
+      "lowercase": "Lowercase",
+      "none": "None"
+    }
+  },
+  "subGoalWidth": {
+    "group": "TEXT POSITIONING OPTIONS",
+    "type": "number",
+    "label": "Sub goal width (px)",
+    "value": 60
+  },
+  "subGoalPaddingLeft": {
+    "group": "TEXT POSITIONING OPTIONS",
+    "type": "number",
+    "label": "Sub goal padding left (px)",
+    "value": 10
+  },
+  "rewardTextPaddingLeft": {
+    "group": "TEXT POSITIONING OPTIONS",
+    "type": "number",
+    "label": "Reward text padding left (px)",
+    "value": 40
+  }
+}
