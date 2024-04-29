@@ -3,7 +3,7 @@
     "group": "Goals configuration",
     "type": "dropdown",
     "label": "Goal type",
-    "value": "tip-session---amount",
+    "value": "tip-goal---amount",
     "options": {
       "follower-goal---amount": "Followers (goal)",
       "follower-session---count": "Followers (session)",
