@@ -1,0 +1,354 @@
+{
+  "goalType": {
+    "group": "Goals configuration",
+    "type": "dropdown",
+    "label": "Goal type",
+    "value": "tip-session---amount",
+    "options": {
+      "follower-goal---amount": "Followers (goal)",
+      "follower-session---count": "Followers (session)",
+      "follower-total---count": "Followers (total)",
+      "subscriber-goal---amount": "Subscribers (goal)",
+      "subscriber-session---count": "Subscribers (session)",
+      "subscriber-total---count": "Subscribers (total)",
+      "cheer-goal---amount": "Cheers/Bits (goal)",
+      "cheer-session---amount": "Cheers/Bits (session)",
+      "tip-goal---amount": "Tips/Donations (goal)",
+      "tip-session---amount": "Tips/Donations (session)"
+    }
+  },
+  "goalTypeLabel": {
+    "group": "Goals configuration",
+    "type": "text",
+    "label": "Goal type label",
+    "value": "EUR"
+  },
+  "hideReachedGoal": {
+    "group": "Goals configuration",
+    "type": "checkbox",
+    "label": "Hide the goal when it is reached?"
+  },
+  "goalsList": {
+    "group": "Goals configuration",
+    "type": "text",
+    "label": "Goals list",
+    "value": "[10|Goal reward 1][20|Goal reward 2][30|Goal reward 3][40|Goal reward 4][50|Goal reward 5][60|Goal reward 6][70|Goal reward 7][80|Goal reward 8][90|Goal reward 9][100|Goal reward 10][110|Goal reward 11][120|Goal reward 12][130|Goal reward 13][140|Goal reward 14][150|Goal reward 15][160|Goal reward 16][170|Goal reward 17][180|Goal reward 18][190|Goal reward 19][200|Goal reward 20]"
+  },
+
+  "rootElementBackgroundImage": {
+    "group": "General widget styles",
+    "type": "image-input",
+    "label": "Widget background image"
+  },
+  "rootElementBackgroundColor": {
+    "group": "General widget styles",
+    "type": "colorpicker",
+    "label": "Widget background color",
+    "value": "rgba(0, 0, 0, 0)"
+  },
+  "rootElementBorderColor": {
+    "group": "General widget styles",
+    "type": "colorpicker",
+    "label": "Widget border color",
+    "value": "rgba(0, 0, 0, 0)"
+  },
+  "rootElementBorderWidth": {
+    "group": "General widget styles",
+    "type": "number",
+    "label": "Widget border width (px)",
+    "value": 0,
+    "min": 0,
+    "step": 1
+  },
+  "rootElementBorderRadius": {
+    "group": "General widget styles",
+    "type": "number",
+    "label": "Widget border radius (px)",
+    "value": 0,
+    "min": 0,
+    "step": 1
+  },
+  "rootElementPadding": {
+    "group": "General widget styles",
+    "type": "number",
+    "label": "Spacing to widget content (px)",
+    "value": 20,
+    "min": 0,
+    "step": 1
+  },
+
+  "goalsListGap": {
+    "group": "Goal list styles",
+    "type": "number",
+    "label": "Spacing between goal records (px)",
+    "value": 10,
+    "min": 0,
+    "step": 1
+  },
+
+  "goalRecordBackgroundColor": {
+    "group": "Goal record styles",
+    "type": "colorpicker",
+    "label": "Goal record background color",
+    "value": "#5d8fde"
+  },
+  "goalRecordCompletedBackgroundColor": {
+    "group": "Goal record styles",
+    "type": "colorpicker",
+    "label": "Completed goal record background color",
+    "value": "#5dde6a"
+  },
+  "goalRecordInProgressBackgroundColor": {
+    "group": "Goal record styles",
+    "type": "colorpicker",
+    "label": "In progress goal record background color",
+    "value": "#dec65d"
+  },
+  "goalRecordBorderColor": {
+    "group": "Goal record styles",
+    "type": "colorpicker",
+    "label": "Goal record border color",
+    "value": "rgba(0, 0, 0, 0)"
+  },
+  "goalRecordBorderWidth": {
+    "group": "Goal record styles",
+    "type": "number",
+    "label": "Goal record border width (px)",
+    "value": 0,
+    "min": 0,
+    "step": 1
+  },
+  "goalRecordBorderRadius": {
+    "group": "Goal record styles",
+    "type": "number",
+    "label": "Goal record border radius (px)",
+    "value": 10,
+    "min": 0,
+    "step": 1
+  },
+  "goalRecordHeight": {
+    "group": "Goal record styles",
+    "type": "number",
+    "label": "Goal record height (px)",
+    "value": 50,
+    "min": 0,
+    "step": 1
+  },
+  "goalRecordHorizontalPadding": {
+    "group": "Goal record styles",
+    "type": "number",
+    "label": "Horizontal spacing to goal record content (px)",
+    "value": 15,
+    "min": 0,
+    "step": 1
+  },
+
+  "goalRecordInProgressAnimationColor": {
+    "group": "Goal record in progress animation",
+    "type": "colorpicker",
+    "label": "Animation color",
+    "value": "rgba(255, 0, 0, 1)"
+  },
+  "goalRecordInProgressAnimationWidth": {
+    "group": "Goal record in progress animation",
+    "type": "number",
+    "label": "Animation width (px)",
+    "value": 2,
+    "min": 0,
+    "step": 1
+  },
+  "goalRecordInProgressAnimationDashArray": {
+    "group": "Goal record in progress animation",
+    "type": "number",
+    "label": "Animation dasharray (%)",
+    "value": 75,
+    "min": 0,
+    "max": 100,
+    "step": 1
+  },
+  "goalRecordInProgressAnimationDuration": {
+    "group": "Goal record in progress animation",
+    "type": "number",
+    "label": "Animation duration (seconds)",
+    "value": 2.5,
+    "min": 0,
+    "step": 0.1
+  },
+
+  "goalAmountElementWidth": {
+    "group": "Goal amount styles",
+    "type": "number",
+    "label": "Goal amount - element width (px)",
+    "value": 100,
+    "min": 0,
+    "step": 1
+  },
+  "goalAmountFontFamily": {
+    "group": "Goal amount styles",
+    "type": "googleFont",
+    "label": "Goal amount - font family",
+    "value": "Roboto"
+  },
+  "goalAmountFontWeight": {
+    "group": "Goal amount styles",
+    "type": "dropdown",
+    "label": "Goal amount - font weight",
+    "value": "400",
+    "options": {
+      "100": "100 - Thin (Hairline)",
+      "200": "200 - Extra Light (Ultra Light)",
+      "300": "300 - Light",
+      "400": "400 - Normal (Regular)",
+      "500": "500 - Medium",
+      "600": "600 - Semi Bold (Demi Bold)",
+      "700": "700 - Bold",
+      "800": "800 - Extra Bold (Ultra Bold)",
+      "900": "900 - Black (Heavy)"
+    }
+  },
+  "goalAmountFontColor": {
+    "group": "Goal amount styles",
+    "type": "colorpicker",
+    "label": "Goal amount - font color",
+    "value": "#ffffff"
+  },
+  "goalAmountFontSize": {
+    "group": "Goal amount styles",
+    "type": "number",
+    "label": "Goal amount - font size (px)",
+    "value": 24,
+    "min": 0,
+    "step": 1
+  },
+
+  "goalTypeLabelElementWidth": {
+    "group": "Goal type label styles",
+    "type": "number",
+    "label": "Goal type label - element width (px)",
+    "value": 100,
+    "min": 0,
+    "step": 1
+  },
+  "goalTypeLabelFontFamily": {
+    "group": "Goal type label styles",
+    "type": "googleFont",
+    "label": "Goal type label - font family",
+    "value": "Roboto"
+  },
+  "goalTypeLabelFontWeight": {
+    "group": "Goal type label styles",
+    "type": "dropdown",
+    "label": "Goal type label - font weight",
+    "value": "400",
+    "options": {
+      "100": "100 - Thin (Hairline)",
+      "200": "200 - Extra Light (Ultra Light)",
+      "300": "300 - Light",
+      "400": "400 - Normal (Regular)",
+      "500": "500 - Medium",
+      "600": "600 - Semi Bold (Demi Bold)",
+      "700": "700 - Bold",
+      "800": "800 - Extra Bold (Ultra Bold)",
+      "900": "900 - Black (Heavy)"
+    }
+  },
+  "goalTypeLabelFontColor": {
+    "group": "Goal type label styles",
+    "type": "colorpicker",
+    "label": "Goal type label - font color",
+    "value": "#ffffff"
+  },
+  "goalTypeLabelFontSize": {
+    "group": "Goal type label styles",
+    "type": "number",
+    "label": "Goal type label - font size (px)",
+    "value": 24,
+    "min": 0,
+    "step": 1
+  },
+
+  "goalRewardDescriptionFontFamily": {
+    "group": "Goal reward description styles",
+    "type": "googleFont",
+    "label": "Goal reward description - font family",
+    "value": "Roboto"
+  },
+  "goalRewardDescriptionFontWeight": {
+    "group": "Goal reward description styles",
+    "type": "dropdown",
+    "label": "Goal reward description - font weight",
+    "value": "400",
+    "options": {
+      "100": "100 - Thin (Hairline)",
+      "200": "200 - Extra Light (Ultra Light)",
+      "300": "300 - Light",
+      "400": "400 - Normal (Regular)",
+      "500": "500 - Medium",
+      "600": "600 - Semi Bold (Demi Bold)",
+      "700": "700 - Bold",
+      "800": "800 - Extra Bold (Ultra Bold)",
+      "900": "900 - Black (Heavy)"
+    }
+  },
+  "goalRewardDescriptionFontColor": {
+    "group": "Goal reward description styles",
+    "type": "colorpicker",
+    "label": "Goal reward description - font color",
+    "value": "#ffffff"
+  },
+  "goalRewardDescriptionFontSize": {
+    "group": "Goal reward description styles",
+    "type": "number",
+    "label": "Goal reward description - font size (px)",
+    "value": 24,
+    "min": 0,
+    "step": 1
+  },
+
+  "goalStatusIconSize": {
+    "group": "Goal status icon styles",
+    "type": "number",
+    "label": "Goal status icon - size (px)",
+    "value": 32,
+    "min": 0,
+    "step": 1
+  },
+
+  "goalProgressFontFamily": {
+    "group": "Goal progress styles",
+    "type": "googleFont",
+    "label": "Goal progress - font family",
+    "value": "Roboto"
+  },
+  "goalProgressFontWeight": {
+    "group": "Goal progress styles",
+    "type": "dropdown",
+    "label": "Goal progress - font weight",
+    "value": "700",
+    "options": {
+      "100": "100 - Thin (Hairline)",
+      "200": "200 - Extra Light (Ultra Light)",
+      "300": "300 - Light",
+      "400": "400 - Normal (Regular)",
+      "500": "500 - Medium",
+      "600": "600 - Semi Bold (Demi Bold)",
+      "700": "700 - Bold",
+      "800": "800 - Extra Bold (Ultra Bold)",
+      "900": "900 - Black (Heavy)"
+    }
+  },
+  "goalProgressFontColor": {
+    "group": "Goal progress styles",
+    "type": "colorpicker",
+    "label": "Goal progress - font color",
+    "value": "#ffffff"
+  },
+  "goalProgressFontSize": {
+    "group": "Goal progress styles",
+    "type": "number",
+    "label": "Goal progress - font size (px)",
+    "value": 24,
+    "min": 0,
+    "step": 1
+  }
+}

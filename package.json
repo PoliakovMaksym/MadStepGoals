@@ -1,0 +1,8 @@
+{
+  "name": "stream.goals",
+  "description": "Source code for a StreamElements Widget to manage your stream goals.",
+  "version": "1.0.0",
+  "devDependencies": {
+    "prettier": "3.2.5"
+  }
+}

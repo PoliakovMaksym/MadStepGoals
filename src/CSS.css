@@ -1,0 +1,123 @@
+* {
+    overflow: hidden;
+}
+
+html, body {
+    margin: 0;
+    display: flex;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+.root {
+    position: relative;
+    flex: 1;
+    display: flex;
+    background-color: {{rootElementBackgroundColor}};
+    background-image: url({{rootElementBackgroundImage}});
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: {{rootElementBorderWidth}}px solid {{rootElementBorderColor}};
+    border-radius: {{rootElementBorderRadius}}px;
+    padding: {{rootElementPadding}}px;
+}
+
+.goals-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: {{goalsListGap}}px;
+}
+
+.goals-list .goal {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: {{goalRecordHeight}}px;
+    min-height: {{goalRecordHeight}}px;
+    padding: 0 {{goalRecordHorizontalPadding}}px;
+    background-color: {{goalRecordBackgroundColor}};
+    border: {{goalRecordBorderWidth}}px solid {{goalRecordBorderColor}};
+    border-radius: {{goalRecordBorderRadius}}px;
+}
+
+.goals-list .goal img {
+    width: {{goalStatusIconSize}}px;
+    height: {{goalStatusIconSize}}px;
+}
+
+.goals-list .goal.completed {
+    background-color: {{goalRecordCompletedBackgroundColor}};
+}
+
+.goals-list .goal .goal-amount {
+    width: {{goalAmountElementWidth}}px;
+    color: {{goalAmountFontColor}};
+    font-family: '{{goalAmountFontFamily}}', sans-serif;
+    font-size: {{goalAmountFontSize}}px;
+    font-weight: {{goalAmountFontWeight}};
+}
+
+.goals-list .goal .goal-type-label {
+    width: {{goalTypeLabelElementWidth}}px;
+    color: {{goalTypeLabelFontColor}};
+    font-family: '{{goalTypeLabelFontFamily}}', sans-serif;
+    font-size: {{goalTypeLabelFontSize}}px;
+    font-weight: {{goalTypeLabelFontWeight}};
+}
+
+.goals-list .goal .goal-reward-description {
+    flex: 1;
+    color: {{goalRewardDescriptionFontColor}};
+    font-family: '{{goalRewardDescriptionFontFamily}}', sans-serif;
+    font-size: {{goalRewardDescriptionFontSize}}px;
+    font-weight: {{goalRewardDescriptionFontWeight}};
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.goals-list .goal:not(.completed) .completed-icon,
+.goals-list .goal:not(.in-progress) .progress {
+    display: none;
+}
+
+.goals-list .goal .progress {
+    color: {{goalProgressFontColor}};
+    font-family: '{{goalProgressFontFamily}}', sans-serif;
+    font-size: {{goalProgressFontSize}}px;
+    font-weight: {{goalProgressFontWeight}};
+}
+
+.wild-tori {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0;
+    top: -100%;
+    left: -100%;
+}
+
+.wild-tori.animate {
+    animation: wild-tori-animation 5s linear;
+}
+
+@keyframes wild-tori-animation {
+    0% { opacity: 0 }
+    50% { opacity: 0.5 }
+    1000% { opacity: 0 }
+}
+
+.head-shake-animation {
+    animation: head-shake-animation 1.5s linear;
+}
+
+@keyframes head-shake-animation {
+    0% { transform: translateX(0) }
+    6.5% { transform: translateX(-6px) rotateY(-9deg) }
+    18.5% { transform: translateX(5px) rotateY(7deg) }
+    31.5% { transform: translateX(-3px) rotateY(-5deg) }
+    43.5% { transform: translateX(2px) rotateY(3deg) }
+    50% { transform: translateX(0) }
+}
