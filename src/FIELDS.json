@@ -23,11 +23,6 @@
     "label": "Goal type label",
     "value": "EUR"
   },
-  "hideReachedGoal": {
-    "group": "Goals configuration",
-    "type": "checkbox",
-    "label": "Hide the goal when it is reached?"
-  },
   "goalsList": {
     "group": "Goals configuration",
     "type": "text",
