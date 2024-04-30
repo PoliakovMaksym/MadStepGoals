@@ -47,6 +47,7 @@ html, body {
     background-color: {{goalRecordBackgroundColor}};
     border: {{goalRecordBorderWidth}}px solid {{goalRecordBorderColor}};
     border-radius: {{goalRecordBorderRadius}}px;
+    margin-top: 0;
 }
 
 .goals-list .goal img {
@@ -84,8 +85,6 @@ html, body {
     font-family: '{{goalRewardDescriptionFontFamily}}', sans-serif;
     font-size: {{goalRewardDescriptionFontSize}}px;
     font-weight: {{goalRewardDescriptionFontWeight}};
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .goals-list .goal:not(.completed) .completed-icon,

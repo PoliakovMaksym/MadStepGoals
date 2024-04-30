@@ -18,33 +18,30 @@ const randomInteger = max => Math.floor(Math.random() * (max + 1));
 
 // Converts this string pattern -> "[amount1|description1][amount2|description2]"
 // into this array -> [{id:1,amount:amount1,description:description1},{id:2,amount:amount2,description:description2}]
-const goalsListParser = goalsString => {
+const goalsListParser = inputString => {
   // Split the input goals string into individual reward sections
-  const rewardSections = goalsString.match(/\[\d+\|[^[\]]+]/g);
+  const parsedInputString = inputString.match(/\[\d+\|[^[\]]+]/g);
 
   // Empty or unparseable string = no goals
-  if (!rewardSections) return [];
+  if (!parsedInputString) return [];
 
-  // Define an array to store the parsed rewards
-  const rewardsArray = [];
+  // This will store the final list of goals that we can work with in the code
+  const result = [];
 
-  // Iterate over each reward section
-  rewardSections.forEach((section, index) => {
+  // Iterate over each parsed goal
+  parsedInputString.forEach((section, index) => {
     // Parse the amount and description from the section
     const [, amountString, description] = section.match(/\[(\d+)\|(.+)]/);
 
-    // Construct the reward object
-    const reward = {
+    // Construct and add the goal object to the array
+    result.push({
       id: index + 1,
       amount: parseInt(amountString),
       description: description.trim(),
-    };
-
-    // Add the reward object to the array
-    rewardsArray.push(reward);
+    });
   });
 
-  return rewardsArray;
+  return result;
 };
 
 /**
@@ -69,7 +66,7 @@ function releaseTheWildTori() {
     WildToriClone.id = '';
 
     // The clone will inherit the full transparency from the original Wild Tori,
-    // but just in case we set it again
+    // but just in case we set it again.
     WildToriClone.opacity = 0;
 
     // Get RootContainerElement dimensions to know where the clone can appear
@@ -80,7 +77,7 @@ function releaseTheWildTori() {
     WildToriClone.style.left = `${randomInteger(width)}px`;
 
     // Shift the clone to be positioned around its center point
-    // instead of the top left corner and set random rotation for fun
+    // instead of the top left corner and set random rotation for fun.
     WildToriClone.style.transform = `translate(-50%, -50%) rotate(${randomInteger(360)}deg)`;
 
     // Add the clone to the page
@@ -128,42 +125,47 @@ const releaseTheWildToriOnChatMessage = chatMessage => {
 // -------------------------------------------------------------------------------------------------
 // Example:
 //    You have 20 goals total. Each goal has a height of 50px. The list has a height of 550px. The
-//    gap between goal records is 10px. How many goal records will be visible? After the
-//    calculation, the answer is 9.3333333 or in other words, 9 fully visible and plus 1 not fully
-//    visible. The widget users can calculate it themselves and adjust the height of the widget,
-//    so there will be no "not fully visible" goal records at all, but why do it manually everytime?
+//    gap between each goal is 10px. How many goals will be visible? After the calculation, the
+//    answer is 9.3333333 or in other words, 9 fully visible and plus 1 not fully visible. The
+//    widget users can calculate it themselves and adjust the height of the widget, so there will be
+//    no "not fully visible" goal records at all, but why do it manually everytime?
 // -------------------------------------------------------------------------------------------------
 // The solution
 // -------------------------------------------------------------------------------------------------
-// We will use the gap between goal records from the widget as a "minimum gap" and, if needed,
-// increase it to make sure there are no "not fully visible" goal records.
+// We will use the gap between goals from the widget as a "minimum gap" and, if needed,
+// increase it to make sure there are no "not fully visible" goals.
 // -------------------------------------------------------------------------------------------------
-const adjustTheGapBetweenGoalRecords = () => {
+const adjustTheGapBetweenGoals = () => {
   // Height of the list where the goals will be rendered
   const goalsListHeight = GlobalVariables.GoalsListElement.getBoundingClientRect().height;
-  // Height of the goal record and gap value from the widget fields
+  // Height of the goal and gap value from the widget fields
   const { goalRecordHeight, goalsListGap: minimumGap } = GlobalVariables.widgetFields;
 
   // Calculate how many fully visible goals can fit into the list
   const amountOfGoalsThatCanFit = Math.trunc(
     // Add a minimum gap to the list height, so we don't end up with an extra gap
-    // after the last fully visible goal record after all the calculations.
+    // after the last fully visible goal after all the calculations.
     // If this happens, the "spacing" on top of the list
     // will be visually smaller than on the bottom of the list.
     (goalsListHeight + minimumGap) / (goalRecordHeight + minimumGap),
   );
 
-  // Store this amount for later use
-  GlobalVariables.amountOfGoalsThatFitsInTheGoalsList = amountOfGoalsThatCanFit;
-
   // Calculate the "optimal" or "adjusted" gap, so we have zero "not fully visible" goals
   const optimalGap =
     (goalsListHeight - amountOfGoalsThatCanFit * goalRecordHeight) / (amountOfGoalsThatCanFit - 1);
 
-  // Only overwrite the original gap with the adjusted one if it is actually bigger
-  if (optimalGap > minimumGap) {
-    GlobalVariables.GoalsListElement.style.gap = `${optimalGap}px`;
-  }
+  // Only overwrite the original gap with the adjusted one
+  // if it is actually bigger and allowed by the widget user
+  const finalGap =
+    GlobalVariables.widgetFields.goalListGapAdjustment && optimalGap > minimumGap
+      ? optimalGap
+      : minimumGap;
+
+  GlobalVariables.GoalsListElement.style.gap = `${finalGap}px`;
+
+  // Store some calculated values for later use
+  GlobalVariables.amountOfGoalsThatFitsInTheGoalsList = amountOfGoalsThatCanFit;
+  GlobalVariables.goalsFinalGap = finalGap;
 };
 
 // Parse goals information from the widget and render the
@@ -198,15 +200,17 @@ const renderGoals = () => {
 
 // Update the state of all the goals on the screen
 // according to the current state of the stream
-const updateRenderedGoals = currentProgress => {
-  let currentGoalInProgressFound = false;
+const updateRenderedGoals = (currentProgress, initialRenderUpdate) => {
+  let goalInProgressPosition = 0;
 
-  // Go through each goal
-  Array.from(document.getElementsByClassName('goal')).forEach(goal => {
+  // Go through each goal that is not marked as "hidden" already.
+  // Goals marked as "hidden" were completed some time ago and don't need to be handled.
+  const allNotHiddenGoals = Array.from(document.querySelectorAll('.goal:not(.hidden)'));
+  allNotHiddenGoals.forEach((goal, index) => {
     // Grab goal's amount
     const goalAmount = parseInt(goal.getAttribute('data-amount'));
 
-    // Remove marks related to goals in progress.
+    // Remove marks related to goal in progress.
     // The correct goal will be marked as "in progress" when we find it.
     goal.classList.remove('in-progress');
     goal.style.removeProperty('background');
@@ -214,10 +218,9 @@ const updateRenderedGoals = currentProgress => {
     // The goal is completed
     if (goalAmount <= currentProgress) {
       // If the goal is not already marked as "completed," that means it was just completed.
-      // In this case, we add a little animation for a short period of time.
-      if (!goal.classList.contains('completed')) {
+      // In this case, we add a little animation unless this is a very first render update.
+      if (!goal.classList.contains('completed') && !initialRenderUpdate) {
         goal.classList.add('animate');
-        setTimeout(() => goal.classList.remove('animate'), 1000 * 2);
       }
 
       // Mark goal as "completed"
@@ -225,14 +228,10 @@ const updateRenderedGoals = currentProgress => {
     }
     // The goal is not completed
     else {
-      // Just in case, remove marks related to completed goals
-      goal.classList.remove('completed');
-      goal.classList.remove('goal-complete-animation');
-
       // We haven't found the first "in progress" goal yet
-      if (!currentGoalInProgressFound) {
-        // Save the fact that we found the goal that is currently in progress
-        currentGoalInProgressFound = true;
+      if (!goalInProgressPosition) {
+        // Save the position of the found goal that is currently in progress
+        goalInProgressPosition = index + 1;
 
         const { widgetFields } = GlobalVariables;
 
@@ -246,6 +245,61 @@ const updateRenderedGoals = currentProgress => {
       }
     }
   });
+
+  // Right after all the animations, check if goals should be moved outside the page,
+  // so the "in progress" goal stays somewhat in the middle of the list and always visible.
+  setTimeout(
+    () => {
+      const { widgetFields, goalsFinalGap, amountOfGoalsThatFitsInTheGoalsList } = GlobalVariables;
+
+      // Name shortcuts
+      const animationDuration = widgetFields.goalListScrollAnimationDuration;
+      const goalHeight = widgetFields.goalRecordHeight;
+
+      // This should be a close enough position to the middle of the list
+      const approximatePositionInTheMiddle = amountOfGoalsThatFitsInTheGoalsList / 2;
+
+      // If the "in progress" goal exists, and it didn't pass the
+      // approximate middle of the list, then we don't need to do anything.
+      if (goalInProgressPosition && goalInProgressPosition < approximatePositionInTheMiddle) {
+        return;
+      }
+
+      // Calculate how many goals we have to "hide".
+      let numberOfGoalsToHide;
+
+      // If "in progress" goal exists
+      if (goalInProgressPosition) {
+        numberOfGoalsToHide = Math.min(
+          // This is the number of "extra" goals above
+          Math.trunc(goalInProgressPosition - approximatePositionInTheMiddle),
+          // This is the number of "future" goals in the list
+          allNotHiddenGoals.length - amountOfGoalsThatFitsInTheGoalsList,
+        );
+      }
+      // If all goals were completed
+      else {
+        numberOfGoalsToHide = allNotHiddenGoals.length - amountOfGoalsThatFitsInTheGoalsList;
+      }
+
+      // For each goal that we are going to "hide"
+      for (let i = 0; i < numberOfGoalsToHide; i++) {
+        if (!initialRenderUpdate) {
+          // Add "scroll" animation if this is not the initial widget loading
+          allNotHiddenGoals[i].style.transition =
+            `margin-top ${animationDuration}s linear ${i * animationDuration}s`;
+        }
+
+        // Mark as "hidden" so we will skip it in the next updates
+        allNotHiddenGoals[i].classList.add('hidden');
+        // Move it outside the screen
+        allNotHiddenGoals[i].style.marginTop = `-${goalHeight + goalsFinalGap}px`;
+      }
+    },
+    // On the initial widget loading there no animations, so we don't need to wait for anything.
+    // Otherwise, its 1.5s animation duration in CSS +0.5s just in case.
+    initialRenderUpdate ? 0 : 1000 * 2,
+  );
 };
 
 /**
@@ -263,6 +317,9 @@ const updateRenderedGoals = currentProgress => {
 // Do something when the widget is first loaded.
 // Docs: https://dev.streamelements.com/docs/widgets/6707a030af0b9-custom-widget-events#on-widget-load
 window.addEventListener('onWidgetLoad', widgetLoadEventObject => {
+  // StreamElements widget builder has an ENORMOUS amount of trash in the console...
+  console.clear();
+
   // Find important elements on the page and store them for later use
   GlobalVariables.RootContainerElement = document.querySelector('#root');
   GlobalVariables.GoalsListElement = document.querySelector('#goals-list');
@@ -279,7 +336,7 @@ window.addEventListener('onWidgetLoad', widgetLoadEventObject => {
   GlobalVariables.goalsList = goalsListParser(GlobalVariables.widgetFields.goalsList);
 
   // Prepare the goal list CSS so rendered goals look prettier
-  adjustTheGapBetweenGoalRecords();
+  adjustTheGapBetweenGoals();
 
   // Render all the goals on the screen
   renderGoals();
@@ -288,7 +345,7 @@ window.addEventListener('onWidgetLoad', widgetLoadEventObject => {
   const progress = widgetLoadEventObject.detail.session.data[goalMainType][goalSubType];
 
   GlobalVariables.currentProgress = progress;
-  updateRenderedGoals(progress);
+  updateRenderedGoals(progress, !GlobalVariables.widgetFields.goalListScrollAnimationTest);
 
   // Automatically release the Wild Tori every 30 minutes
   setInterval(releaseTheWildTori, 1000 * 60 * 30);
