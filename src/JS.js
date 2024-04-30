@@ -129,14 +129,14 @@ const releaseTheWildToriOnChatMessage = chatMessage => {
 // Example:
 //    You have 20 goals total. Each goal has a height of 50px. The list has a height of 550px. The
 //    gap between goal records is 10px. How many goal records will be visible? After the
-//    calculation, the answer is 9.3333333 or in other words, 9 fully visible and +1 not fully
-//    visible. Yes, the widget user can calculate it and adjust the height of the widget, so there
-// will be no "not fully visible" goal records at all, but why?
+//    calculation, the answer is 9.3333333 or in other words, 9 fully visible and plus 1 not fully
+//    visible. The widget users can calculate it themselves and adjust the height of the widget,
+//    so there will be no "not fully visible" goal records at all, but why do it manually everytime?
 // -------------------------------------------------------------------------------------------------
 // The solution
 // -------------------------------------------------------------------------------------------------
-// We will use the gap between goal records from the widget as a "minimum gap" and increase to make
-// sure there are no "not fully visible" goal records.
+// We will use the gap between goal records from the widget as a "minimum gap" and, if needed,
+// increase it to make sure there are no "not fully visible" goal records.
 // -------------------------------------------------------------------------------------------------
 const adjustTheGapBetweenGoalRecords = () => {
   // Height of the list where the goals will be rendered
