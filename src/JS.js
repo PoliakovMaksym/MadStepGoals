@@ -123,6 +123,49 @@ const releaseTheWildToriOnChatMessage = chatMessage => {
  * Goals renderer ----- Start
  */
 
+// -------------------------------------------------------------------------------------------------
+// The problem
+// -------------------------------------------------------------------------------------------------
+// Example:
+//    You have 20 goals total. Each goal has a height of 50px. The list has a height of 550px. The
+//    gap between goal records is 10px. How many goal records will be visible? After the
+//    calculation, the answer is 9.3333333 or in other words, 9 fully visible and +1 not fully
+//    visible. Yes, the widget user can calculate it and adjust the height of the widget, so there
+// will be no "not fully visible" goal records at all, but why?
+// -------------------------------------------------------------------------------------------------
+// The solution
+// -------------------------------------------------------------------------------------------------
+// We will use the gap between goal records from the widget as a "minimum gap" and increase to make
+// sure there are no "not fully visible" goal records.
+// -------------------------------------------------------------------------------------------------
+const adjustTheGapBetweenGoalRecords = () => {
+  // Height of the list where the goals will be rendered
+  const goalsListHeight = GlobalVariables.GoalsListElement.getBoundingClientRect().height;
+  // Height of the goal record and gap value from the widget fields
+  const { goalRecordHeight, goalsListGap: minimumGap } = GlobalVariables.widgetFields;
+
+  // Calculate how many fully visible goals can fit into the list
+  const amountOfGoalsThatCanFit = Math.trunc(
+    // Add a minimum gap to the list height, so we don't end up with an extra gap
+    // after the last fully visible goal record after all the calculations.
+    // If this happens, the "spacing" on top of the list
+    // will be visually smaller than on the bottom of the list.
+    (goalsListHeight + minimumGap) / (goalRecordHeight + minimumGap),
+  );
+
+  // Store this amount for later use
+  GlobalVariables.amountOfGoalsThatFitsInTheGoalsList = amountOfGoalsThatCanFit;
+
+  // Calculate the "optimal" or "adjusted" gap, so we have zero "not fully visible" goals
+  const optimalGap =
+    (goalsListHeight - amountOfGoalsThatCanFit * goalRecordHeight) / (amountOfGoalsThatCanFit - 1);
+
+  // Only overwrite the original gap with the adjusted one if it is actually bigger
+  if (optimalGap > minimumGap) {
+    GlobalVariables.GoalsListElement.style.gap = `${optimalGap}px`;
+  }
+};
+
 // Parse goals information from the widget and render the
 // initial list of goals without any special effects
 const renderGoals = () => {
@@ -234,6 +277,9 @@ window.addEventListener('onWidgetLoad', widgetLoadEventObject => {
 
   // Parse the goal list to something we can work with in code
   GlobalVariables.goalsList = goalsListParser(GlobalVariables.widgetFields.goalsList);
+
+  // Prepare the goal list CSS so rendered goals look prettier
+  adjustTheGapBetweenGoalRecords();
 
   // Render all the goals on the screen
   renderGoals();

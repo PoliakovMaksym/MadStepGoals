@@ -111,12 +111,12 @@ html, body {
 }
 
 .wild-tori.animate {
-    animation: wild-tori-animation 5s linear;
+    animation: wild-tori-animation 5s ease-in;
 }
 
 @keyframes wild-tori-animation {
     0% { opacity: 0 }
-    50% { opacity: 0.5 }
+    75% { opacity: 0.5 }
     1000% { opacity: 0 }
 }
 
