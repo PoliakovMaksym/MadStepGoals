@@ -173,8 +173,8 @@ const updateRenderedGoals = currentProgress => {
       // If the goal is not already marked as "completed," that means it was just completed.
       // In this case, we add a little animation for a short period of time.
       if (!goal.classList.contains('completed')) {
-        goal.classList.add('goal-complete-animation');
-        setTimeout(() => goal.classList.remove('goal-complete-animation'), 1000 * 2);
+        goal.classList.add('animate');
+        setTimeout(() => goal.classList.remove('animate'), 1000 * 2);
       }
 
       // Mark goal as "completed"
@@ -225,7 +225,7 @@ window.addEventListener('onWidgetLoad', widgetLoadEventObject => {
   GlobalVariables.GoalsListElement = document.querySelector('#goals-list');
   GlobalVariables.WildTori = document.querySelector('#wild-tori');
 
-  // Copy widget fields for future use
+  // Copy widget fields for later use
   GlobalVariables.widgetFields = widgetLoadEventObject.detail.fieldData;
   // Add some custom shortcuts to certain widget fields
   const [goalMainType, goalSubType] = GlobalVariables.widgetFields.goalType.split('---');
@@ -263,11 +263,11 @@ window.addEventListener('onEventReceived', eventReceivedEventObject => {
 // Do something when stream session data is updated (new tip/cheer/follower).
 // Docs: https://dev.streamelements.com/docs/widgets/6707a030af0b9-custom-widget-events#on-session-update
 window.addEventListener('onSessionUpdate', sessionUpdateEventObject => {
-  // Get update current progress from the stream session and update goals accordingly
+  // Get updated progress from the stream session and update goals accordingly
   const { goalMainType, goalSubType } = GlobalVariables;
   const newProgress = sessionUpdateEventObject.detail.session[goalMainType][goalSubType];
 
-  // Update goals only if progress was updated
+  // Update goals only if progress was actually changed
   if (GlobalVariables.currentProgress !== newProgress) {
     GlobalVariables.currentProgress = newProgress;
     updateRenderedGoals(newProgress);

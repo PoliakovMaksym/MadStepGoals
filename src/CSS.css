@@ -58,6 +58,10 @@ html, body {
     background-color: {{goalRecordCompletedBackgroundColor}};
 }
 
+.goals-list .goal.completed.animate {
+    animation: goal-complete-animation 1.5s linear;
+}
+
 .goals-list .goal .goal-amount {
     width: {{goalAmountElementWidth}}px;
     color: {{goalAmountFontColor}};
@@ -114,10 +118,6 @@ html, body {
     0% { opacity: 0 }
     50% { opacity: 0.5 }
     1000% { opacity: 0 }
-}
-
-.goal-complete-animation {
-    animation: goal-complete-animation 1.5s linear;
 }
 
 @keyframes goal-complete-animation {
